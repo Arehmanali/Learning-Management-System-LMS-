@@ -32,75 +32,9 @@ void deleteStudent (string stdNamesList[], string stdRegNoList[], string stdCour
 void registerCourse(string stdRegNoList[], string stdCourseList[][100], string courseCodeList[],string regNo,string courseCode); 
 void unRegisterCourse(string stdRegNoList[],string stdCourseList[][100],string regNo,string courseCode); 
 void viewAllStudents(string stdRegNoList[], string stdNamesList[],string stdCourseList[][100] );
-void  saveStudents( string stdRegNoList[], string stdNameList[], string stdCourseList[][100]) 			// Save the students added by admin
-{
-	int i;
-	ofstream output;
-	output.open("Students.txt");			// Open the input file
-	if(output.is_open())
-	{
-		for(i=0;i<counter3;i++)
-		{
-			output<<stdRegNoList[i]<<","<<stdNameList[i]<<endl;
-			
-			for(int j=0;j<counter4;j++)
-			{
-				if(stdRegNoList[i]==stdCourseList[j][0])
-				{
-					output<<stdCourseList[j][1];
-					if(j!=counter4-1)
-					{
-						output<<",";
-					}
-				}
-				if(j==counter4-1)
-				{
-					output<<endl;
-				}
-				
-			}
-		}
-	}
-	else
-	{
-		cout<<"Unable to open 'Students' file"<<endl;
-	}
-	output.close();
-}
-void LoadStudents(string stdRegNoList[], string stdNamesList[],string stdCourseList[][100])		// Load the saved students from file
-{
-	string line,line1;
-	ifstream input;
-	input.open("Students.txt");
-	if(input.is_open())
-	{
-		for(int i=0;!input.eof();i++)
-		{
-			getline(input,line,',');
-			stdRegNoList[i]=line;
-			getline(input,line);
-			stdNamesList[i]=line;
-			input>>line;
-			for(int j=0;line[j]!='\0';j++)
-			{
-			while(line[j]!=',' && line[j]!='\0')
-			{
-			stdCourseList[counter4][0]=stdRegNoList[i];
-			stdCourseList[counter4][1]+=line[j];
-			j++;
-			}}counter4++;
-			if(!input.eof())
-			{
-				counter3++;
-			}
-		}
-		input.close();
-	}
-	else
-	{
-		cout<<"Unable to open 'Students' file"<<endl;
-	}	
-} 
+void  saveStudents( string stdRegNoList[], string stdNameList[], string stdCourseList[][100]); 			// Save the students added by admin
+void LoadStudents(string stdRegNoList[], string stdNamesList[],string stdCourseList[][100]);		// Load the saved students from file
+
 //Main Part
 int main ()
 {
